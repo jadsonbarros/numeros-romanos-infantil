@@ -5,11 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
   <title>Números Romanos – Crianças</title>
 
-  <!-- Ícone e PWA -->
-  <link rel="manifest" href="manifest.json">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="default">
-
   <style>
     body {
       margin: 0;
@@ -36,11 +31,22 @@
       margin-bottom: 16px;
     }
 
-    .numero {
-      font-size: 64px;
+    input {
+      font-size: 20px;
+      padding: 12px;
+      width: 80%;
+      text-align: center;
+      border-radius: 12px;
+      border: 2px solid #2563eb;
+      margin-bottom: 16px;
+    }
+
+    .resultado {
+      font-size: 56px;
       font-weight: bold;
-      margin: 20px 0;
       color: #2563eb;
+      margin: 20px 0;
+      min-height: 70px;
     }
 
     button {
@@ -57,50 +63,61 @@
     button:active {
       transform: scale(0.95);
     }
-
-    .next {
-      background: #f97316;
-    }
   </style>
 </head>
 <body>
   <div class="app">
     <h1>📜 Números Romanos</h1>
-    <p>Ouça e aprenda!</p>
+    <p>Digite um número e veja em romano</p>
 
-    <div class="numero" id="romano">I</div>
+    <input type="number" id="numero" placeholder="Ex: 7" min="1" max="3999" />
 
-    <button onclick="falar()">🔊 Falar</button>
-    <button class="next" onclick="proximo()">➡️ Próximo</button>
+    <div class="resultado" id="resultado">?</div>
+
+    <button onclick="converter()">🔄 Converter</button>
   </div>
 
   <script>
-    const romanos = [
-      { r: "I", n: "um" },
-      { r: "II", n: "dois" },
-      { r: "III", n: "três" },
-      { r: "IV", n: "quatro" },
-      { r: "V", n: "cinco" },
-      { r: "VI", n: "seis" },
-      { r: "VII", n: "sete" },
-      { r: "VIII", n: "oito" },
-      { r: "IX", n: "nove" },
-      { r: "X", n: "dez" }
-    ];
+    function converter() {
+      const num = parseInt(document.getElementById("numero").value);
+      if (isNaN(num) || num < 1 || num > 3999) {
+        document.getElementById("resultado").innerText = "❌";
+        return;
+      }
 
-    let index = 0;
+      const romano = paraRomano(num);
+      document.getElementById("resultado").innerText = romano;
 
-    function falar() {
-      const texto = `O número ${romanos[index].r} é ${romanos[index].n}`;
-      const fala = new SpeechSynthesisUtterance(texto);
+      const fala = new SpeechSynthesisUtterance(`O número ${num} em algarismo romano é ${romano}`);
       fala.lang = "pt-BR";
       speechSynthesis.speak(fala);
     }
 
-    function proximo() {
-      index = (index + 1) % romanos.length;
-      document.getElementById("romano").innerText = romanos[index].r;
-      falar();
+    function paraRomano(num) {
+      const mapa = [
+        { valor: 1000, simbolo: "M" },
+        { valor: 900, simbolo: "CM" },
+        { valor: 500, simbolo: "D" },
+        { valor: 400, simbolo: "CD" },
+        { valor: 100, simbolo: "C" },
+        { valor: 90, simbolo: "XC" },
+        { valor: 50, simbolo: "L" },
+        { valor: 40, simbolo: "XL" },
+        { valor: 10, simbolo: "X" },
+        { valor: 9, simbolo: "IX" },
+        { valor: 5, simbolo: "V" },
+        { valor: 4, simbolo: "IV" },
+        { valor: 1, simbolo: "I" }
+      ];
+
+      let resultado = "";
+      for (const item of mapa) {
+        while (num >= item.valor) {
+          resultado += item.simbolo;
+          num -= item.valor;
+        }
+      }
+      return resultado;
     }
   </script>
 </body>
