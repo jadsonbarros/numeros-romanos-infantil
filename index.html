@@ -88,9 +88,7 @@
       const romano = paraRomano(num);
       document.getElementById("resultado").innerText = romano;
 
-      const fala = new SpeechSynthesisUtterance(`O número ${num} em algarismo romano é ${romano}`);
-      fala.lang = "pt-BR";
-      speechSynthesis.speak(fala);
+      
     }
 
     function paraRomano(num) {
