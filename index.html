@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+  <title>Números Romanos – Crianças</title>
+
+  <!-- Ícone e PWA -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: "Comic Sans MS", Arial, sans-serif;
+      background: linear-gradient(180deg, #7dd3fc, #fef9c3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      text-align: center;
+    }
+
+    .app {
+      background: white;
+      border-radius: 24px;
+      padding: 24px;
+      width: 90%;
+      max-width: 360px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+
+    h1 {
+      font-size: 22px;
+      margin-bottom: 16px;
+    }
+
+    .numero {
+      font-size: 64px;
+      font-weight: bold;
+      margin: 20px 0;
+      color: #2563eb;
+    }
+
+    button {
+      font-size: 18px;
+      padding: 14px 20px;
+      margin: 8px;
+      border: none;
+      border-radius: 16px;
+      cursor: pointer;
+      background: #22c55e;
+      color: white;
+    }
+
+    button:active {
+      transform: scale(0.95);
+    }
+
+    .next {
+      background: #f97316;
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <h1>📜 Números Romanos</h1>
+    <p>Ouça e aprenda!</p>
+
+    <div class="numero" id="romano">I</div>
+
+    <button onclick="falar()">🔊 Falar</button>
+    <button class="next" onclick="proximo()">➡️ Próximo</button>
+  </div>
+
+  <script>
+    const romanos = [
+      { r: "I", n: "um" },
+      { r: "II", n: "dois" },
+      { r: "III", n: "três" },
+      { r: "IV", n: "quatro" },
+      { r: "V", n: "cinco" },
+      { r: "VI", n: "seis" },
+      { r: "VII", n: "sete" },
+      { r: "VIII", n: "oito" },
+      { r: "IX", n: "nove" },
+      { r: "X", n: "dez" }
+    ];
+
+    let index = 0;
+
+    function falar() {
+      const texto = `O número ${romanos[index].r} é ${romanos[index].n}`;
+      const fala = new SpeechSynthesisUtterance(texto);
+      fala.lang = "pt-BR";
+      speechSynthesis.speak(fala);
+    }
+
+    function proximo() {
+      index = (index + 1) % romanos.length;
+      document.getElementById("romano").innerText = romanos[index].r;
+      falar();
+    }
+  </script>
+</body>
+</html>
