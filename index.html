@@ -5,14 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
   <title>Números Romanos – Crianças</title>
 
-  <!-- Ícone iPhone -->
   <link rel="apple-touch-icon" href="icon.png">
+
+  <!-- Fonte infantil do Google -->
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&display=swap" rel="stylesheet">
 
   <style>
     body {
       margin: 0;
-      font-family: "Comic Sans MS", "Arial Rounded MT Bold", Arial, sans-serif;
-      background: linear-gradient(180deg, #60a5fa, #fde68a);
+      font-family: 'Baloo 2', cursive;
+      background: linear-gradient(180deg, #93c5fd, #fde68a);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -22,38 +24,49 @@
 
     .app {
       background: #ffffff;
-      border-radius: 32px;
-      padding: 28px;
-      width: 90%;
+      border-radius: 36px;
+      padding: 30px 24px 34px;
+      width: 92%;
       max-width: 360px;
-      box-shadow: 0 15px 35px rgba(0,0,0,0.25);
-      border: 4px solid #38bdf8;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+      border: 5px solid #60a5fa;
+      position: relative;
     }
 
     h1 {
-      font-size: 24px;
-      margin-bottom: 12px;
+      font-size: 26px;
+      margin-bottom: 6px;
       color: #1d4ed8;
     }
 
     input {
-      font-size: 22px;
-      padding: 14px;
-      width: 85%;
+      font-size: 24px;
+      padding: 16px;
+      width: 90%;
       text-align: center;
-      border-radius: 18px;
-      border: 3px solid #22c55e;
-      margin-bottom: 18px;
+      border-radius: 22px;
+      border: 4px solid #22c55e;
+      margin: 18px 0 10px;
       background: #ecfeff;
+      outline: none;
+    }
+
+    input:focus {
+      border-color: #16a34a;
     }
 
     .resultado {
-      font-size: 56px;
-      font-weight: bold;
+      font-size: 64px;
+      font-weight: 800;
       color: #2563eb;
-      margin: 20px 0;
-      min-height: 70px;
+      margin: 22px 0;
+      min-height: 74px;
       transition: transform 0.3s ease, color 0.3s ease;
+    }
+
+    .animar {
+      transform: scale(1.35) rotate(-2deg);
+      color: #16a34a;
     }
 
     .animar {
@@ -62,15 +75,21 @@
     }
 
     button {
-      font-size: 20px;
-      padding: 16px 24px;
-      margin: 10px;
+      font-size: 22px;
+      padding: 18px 26px;
+      margin-top: 10px;
       border: none;
-      border-radius: 22px;
+      border-radius: 26px;
       cursor: pointer;
       background: linear-gradient(180deg, #22c55e, #16a34a);
       color: white;
-      box-shadow: 0 6px 0 #15803d;
+      box-shadow: 0 7px 0 #15803d;
+      width: 90%;
+    }
+
+    button:active {
+      transform: translateY(4px);
+      box-shadow: 0 3px 0 #15803d;
     }
 
     button:active {
@@ -86,13 +105,13 @@
 <body>
   <div class="app">
     <h1>📜 Números Romanos</h1>
-    <p>🧒 Digite um número e descubra o romano!</p>
+    <p style="font-size:18px; color:#2563eb;">✨ Digite um número e descubra o romano!</p>
 
     <input type="number" id="numero" placeholder="Ex: 7" min="1" max="3999" />
 
     <div class="resultado" id="resultado">?</div>
 
-    <button onclick="converter()">🔄 Converter</button>
+    <button onclick="converter()">🔢 Converter para Romano</button>
   </div>
 
   <script>
